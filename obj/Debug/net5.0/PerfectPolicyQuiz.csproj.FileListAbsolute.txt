@@ -1,0 +1,6 @@
+C:\anupama\Sem-II\C#WorkSpace\PerfectPolicyQuiz\obj\Debug\net5.0\PerfectPolicyQuiz.GeneratedMSBuildEditorConfig.editorconfig
+C:\anupama\Sem-II\C#WorkSpace\PerfectPolicyQuiz\obj\Debug\net5.0\PerfectPolicyQuiz.AssemblyInfoInputs.cache
+C:\anupama\Sem-II\C#WorkSpace\PerfectPolicyQuiz\obj\Debug\net5.0\PerfectPolicyQuiz.AssemblyInfo.cs
+C:\anupama\Sem-II\C#WorkSpace\PerfectPolicyQuiz\obj\Debug\net5.0\PerfectPolicyQuiz.csproj.CoreCompileInputs.cache
+C:\anupama\Sem-II\C#WorkSpace\PerfectPolicyQuiz\obj\Debug\net5.0\PerfectPolicyQuiz.MvcApplicationPartsAssemblyInfo.cs
+C:\anupama\Sem-II\C#WorkSpace\PerfectPolicyQuiz\obj\Debug\net5.0\PerfectPolicyQuiz.MvcApplicationPartsAssemblyInfo.cache
