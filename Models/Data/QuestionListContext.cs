@@ -19,6 +19,6 @@ namespace PerfectPolicyQuiz.Models.Data
 
         public DbSet<Quiz> Quizs { get; set; }
 
-        public DbSet<QuestionList> QuestionsLists { get; set;  }
     }
 }
+
