@@ -9,7 +9,7 @@ using PerfectPolicyQuiz.Models.Data;
 
 namespace PerfectPolicyQuiz.Migrations
 {
-    [DbContext(typeof(QuestionListContext))]
+    [DbContext(typeof(PerfectPolicyQuizContext))]
     [Migration("20220304060613_FirstMigration")]
     partial class FirstMigration
     {

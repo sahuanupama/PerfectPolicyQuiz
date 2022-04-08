@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PerfectPolicyQuiz.Models;
 using PerfectPolicyQuiz.Models.Data;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,9 @@ namespace PerfectPolicyQuiz.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
-        private readonly QuestionListContext _context;
+        private readonly PerfectPolicyQuizContext _context;
 
-        public QuizController(QuestionListContext context)
+        public QuizController(PerfectPolicyQuizContext context)
         {
             _context = context;
         }
@@ -23,11 +25,12 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Quiz>> GetQuizs()
         {
-           List<Quiz> Quizs = _context.Quizs.ToList();
+            List<Quiz> Quizs = _context.Quizs.ToList();
             return Quizs;
         }
-        // Get:api/Quiz/5
+        // Get:api/<QuizController>/5
         [HttpGet("{id}")]
+
         public ActionResult<Quiz> GetQuiz(int id)
         {
             Quiz quiz = _context.Quizs.Find(id);
@@ -37,12 +40,22 @@ namespace PerfectPolicyQuiz.Controllers
             }
             return quiz;
         }
-    
+
         // Put:api/Quiz/5
-        [HttpPut("{id}")] 
-        public ActionResult PutQuiz(int id, Quiz quiz)
+        [Authorize]
+        [HttpPut("{id}")]
+        public ActionResult<Quiz> PutQuiz(int id, [FromBody] Quiz quiz)
         {
-            _context.Entry(quiz).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            if (id != quiz.QuizId)
+            {
+                return BadRequest();
+            }
+
+            _context.Quizs.Update(quiz);
+            _context.SaveChanges();
+            return Ok();
+
+            /*_context.Entry(quiz).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             try
             {
                 _context.SaveChanges();
@@ -53,15 +66,16 @@ namespace PerfectPolicyQuiz.Controllers
                 throw;
             }
             return NoContent();
-          
+          */
         }
-            
+
         // Post:api/Quiz
         [HttpPost]
         public ActionResult<Quiz> PostQuiz(Quiz quiz)
         {
             _context.Quizs.Add(quiz);
             _context.SaveChanges();
+
             //  return NoContent("PostQuiz");
             return NoContent();
         }
@@ -79,8 +93,7 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Quizs.Remove(quiz);
             _context.SaveChanges();
 
-            return NotFound(); 
+            return NotFound();
         }
     }
 }
- 

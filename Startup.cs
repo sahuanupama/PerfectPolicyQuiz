@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,12 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PerfectPolicyQuiz.Models.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace PerfectPolicyQuiz
 {
@@ -28,7 +27,29 @@ namespace PerfectPolicyQuiz
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<QuestionListContext>( opts =>opts.UseSqlServer(Configuration["ConnectionStrings:QuestionDB"]));
+            services.AddDbContext<PerfectPolicyQuizContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("perfectPolicySqlServer")));
+            // ["ConnectionStrings:QuestionDB"]
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opts =>
+            {
+                opts.RequireHttpsMetadata = false;
+                opts.SaveToken = true;
+
+                opts.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+
+            });
+
+
+
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

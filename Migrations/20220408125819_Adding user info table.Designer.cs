@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PerfectPolicyQuiz.Models.Data;
 
 namespace PerfectPolicyQuiz.Migrations
 {
     [DbContext(typeof(PerfectPolicyQuizContext))]
-    partial class QuestionListContextModelSnapshot : ModelSnapshot
+    [Migration("20220408125819_Adding user info table")]
+    partial class Addinguserinfotable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
