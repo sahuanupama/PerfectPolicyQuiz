@@ -25,7 +25,7 @@ namespace PerfectPolicyQuiz.Controllers
         // GET: api/<QuestionController>
         // Get all Questions
         [HttpGet]
-        public ActionResult<IEnumerable<Question>> Get()
+        public ActionResult<IEnumerable<Question>> GetQuestions()
         {
             List<Question> Questions = _context.Questions.ToList();
             return Questions;

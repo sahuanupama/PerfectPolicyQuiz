@@ -50,7 +50,7 @@ namespace PerfectPolicyQuiz.Controllers
             {
                 var user = GetUser(_userData.Username, _userData.Password);
 
-                if (User != null)
+                if (user != null)
                 {
                     var claims = new[] {
                     // JWT Subject
@@ -90,7 +90,35 @@ namespace PerfectPolicyQuiz.Controllers
             {
                 return BadRequest();
             }
+
         }
-              
+        /*
+        
+          [HttpPost]
+
+          public IActionResult SetColour(IFormCollection collection)
+          {
+              //Retrieve the backcolour from the collection
+              var backColour = collection["colourPicker"].ToString();
+
+              // Retrieve the headercolour from the collection
+              var headerColour = collection["headerColourPicker"].ToString();
+                  []
+              // Retrieve the appname from the collection
+
+              var appName = collection["titlePicker"].ToString();
+
+              // Save the retrieved values in the session
+              HttpContext.Session.SetString("backColor", backColour);
+              HttpContext.Session.SetString("headerColor", headerColour);
+              HttpContext.Session.SetString("@appName", appName);
+
+              // Refresh the page
+             }
+              */
+
+
+
+
     }
 }
