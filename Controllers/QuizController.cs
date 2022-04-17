@@ -73,10 +73,11 @@ namespace PerfectPolicyQuiz.Controllers
 
             _context.Quizs.Update(quiz);
             _context.SaveChanges();
-            return Ok();
+            return Ok(quiz);
         }
 
         // Delete Get:api/Quiz/5
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteQuiz(int id)
         {
@@ -89,7 +90,7 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Quizs.Remove(quiz);
             _context.SaveChanges();
 
-            return NotFound();
+            return Ok();
         }
     }
 }

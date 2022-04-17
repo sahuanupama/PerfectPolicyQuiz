@@ -89,7 +89,7 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpPut("{id}")]
         public ActionResult<Question> Put(int id, [FromBody] Question question)
         {
-            if (id != question.QuizId)
+            if (id != question.QuestionId)
             {
                 return BadRequest();
             }
@@ -100,6 +100,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // DELETE api/<QuestionController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteQuestion(int id)
         {
@@ -112,7 +113,7 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Questions.Remove(question);
             _context.SaveChanges();
 
-            return NotFound();
+            return Ok();
         }
     }
 }

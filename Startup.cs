@@ -23,6 +23,7 @@ namespace PerfectPolicyQuiz
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PerfectPolicyQuizContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("perfectPolicySqlServer")));

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PerfectPolicyQuiz.Models.Data;
 using System;
 using System.Collections.Generic;
@@ -73,8 +74,9 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // PUT api/<OptionController>/5
+        [Authorize]
         [HttpPut("{id}")]
-        public ActionResult PutOption(int id, Option option)
+        public ActionResult<Option> PutOption(int id, Option option)
         {
             _context.Entry(option).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             try
@@ -86,12 +88,13 @@ namespace PerfectPolicyQuiz.Controllers
                 Console.WriteLine(e.Message);
                 throw;
             }
-            return NoContent();
+            return Ok(option);
         }
 
         // DELETE api/<OptionController>/5
+        [Authorize]
         [HttpDelete("{id}")]
-        public NotFoundResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             Option option = _context.Options.Find(id);
             if (option == null)
@@ -100,7 +103,7 @@ namespace PerfectPolicyQuiz.Controllers
             }
             _context.Options.Remove(option);
             _context.SaveChanges();
-            return NotFound();
+            return Ok();
         }
     }
 }
