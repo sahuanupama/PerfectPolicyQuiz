@@ -23,18 +23,13 @@ namespace PerfectPolicyQuiz
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PerfectPolicyQuizContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("perfectPolicySqlServer")));
-            // ["ConnectionStrings:QuestionDB"]
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opts =>
             {
                 opts.RequireHttpsMetadata = false;
                 opts.SaveToken = true;
-
                 opts.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -43,32 +38,7 @@ namespace PerfectPolicyQuiz
                     ValidIssuer = Configuration["Jwt:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                 };
-
             });
-
-            /*services.AddSession(c =>
-                {
-                    c.Cookie.Name = "resultCookie";
-                    c.Cookie.HttpOnly = true;
-                    c.Cookie.IsEssential = true;
-                    c.IdleTimeout = System.TimeSpan.MaxValue.FromSeconds(300);
-                });
-
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-            {
-                if (env.IsDevelopment())
-                {
-                    app.UseDeveloperExceptionPage();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/Home/Error");
-                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                    app.UseHsts();
-                }
-
-            }
-            */
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -76,7 +46,6 @@ namespace PerfectPolicyQuiz
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -87,16 +56,9 @@ namespace PerfectPolicyQuiz
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
-
     }
 }

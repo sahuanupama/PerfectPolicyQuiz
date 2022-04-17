@@ -14,11 +14,8 @@ namespace PerfectPolicyQuiz.Models.Data
         }
 
         public DbSet<Option> Options { get; set; }
-
         public DbSet<Question> Questions { get; set; }
-
         public DbSet<Quiz> Quizs { get; set; }
-
         public DbSet<UserInfo> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -29,7 +26,6 @@ namespace PerfectPolicyQuiz.Models.Data
             builder.Entity<UserInfo>().HasData(
                 new UserInfo { UserInfoId = 1, Username = "Anupama", Password = "1234_abc" });
         }
-
     }
 }
 

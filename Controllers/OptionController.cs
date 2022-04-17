@@ -5,11 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace PerfectPolicyQuiz.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class OptionController : ControllerBase
@@ -20,13 +17,11 @@ namespace PerfectPolicyQuiz.Controllers
             _context = context;
         }
 
-
         // GET: api/<OptionController>
         [HttpGet]
-        public ActionResult<IEnumerable<Option>>GetOptions()
+        public ActionResult<IEnumerable<Option>> GetOptions()
         {
             List<Option> Options = _context.Options.ToList();
-
             return Options;
         }
 
@@ -34,7 +29,7 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpGet("{id}")]
         public ActionResult<Option> GetOption(int id)
         {
-        Option option = _context.Options.Find(id);
+            Option option = _context.Options.Find(id);
 
             if (option == null)
             {
@@ -45,7 +40,7 @@ namespace PerfectPolicyQuiz.Controllers
 
         // POST api/<OptionController>
         [HttpPost]
-        public ActionResult <Option> PostOption(Option option)
+        public ActionResult<Option> PostOption(Option option)
         {
             _context.Options.Add(option);
             _context.SaveChanges();
@@ -54,36 +49,33 @@ namespace PerfectPolicyQuiz.Controllers
 
         // PUT api/<OptionController>/5
         [HttpPut("{id}")]
-        public ActionResult PutOption(int id,Option option)
+        public ActionResult PutOption(int id, Option option)
         {
-        _context.Entry(option).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-        try
+            _context.Entry(option).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            try
             {
                 _context.SaveChanges();
             }
-        catch (Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 throw;
             }
-        return NoContent();
-
+            return NoContent();
         }
 
-            // DELETE api/<OptionController>/5
-            [HttpDelete("{id}")]
-            public NotFoundResult Delete(int id)
+        // DELETE api/<OptionController>/5
+        [HttpDelete("{id}")]
+        public NotFoundResult Delete(int id)
+        {
+            Option option = _context.Options.Find(id);
+            if (option == null)
             {
-        Option option = _context.Options.Find(id);
-        if (option == null)
-            {
-            return NotFound();
+                return NotFound();
             }
-
             _context.Options.Remove(option);
             _context.SaveChanges();
-
             return NotFound();
-            }
+        }
     }
 }

@@ -8,23 +8,13 @@ namespace PerfectPolicyQuiz.Models
 {
     public class Question
     {
-        
-        public int QuestionId { get; set;}
-
+        public int QuestionId { get; set; }
         public string QuestionTopic { get; set; }
-
         public string QuestionText { get; set; }
-
         public string QuestionImage { get; set; }
-
-        //public string QuestionAsnwer { get; set; }
-
-        public int   QuizId { get; set; }
-
-        public Quiz  Quiz { get; set; }
-
+        // public string QuestionAsnwer { get; set; }
+        public int QuizId { get; set; }
+        public Quiz Quiz { get; set; }
         public ICollection<Option> Options { get; set; }
-
-
     }
 }

@@ -21,16 +21,15 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // Get:api/Quiz
-
         [HttpGet]
         public ActionResult<IEnumerable<Quiz>> GetQuizs()
         {
             List<Quiz> Quizs = _context.Quizs.ToList();
             return Quizs;
         }
+
         // Get:api/<QuizController>/5
         [HttpGet("{id}")]
-
         public ActionResult<Quiz> GetQuiz(int id)
         {
             Quiz quiz = _context.Quizs.Find(id);
@@ -54,19 +53,6 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Quizs.Update(quiz);
             _context.SaveChanges();
             return Ok();
-
-            /*_context.Entry(quiz).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            return NoContent();
-          */
         }
 
         // Post:api/Quiz
@@ -76,7 +62,6 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Quizs.Add(quiz);
             _context.SaveChanges();
 
-            //  return NoContent("PostQuiz");
             return NoContent();
         }
 

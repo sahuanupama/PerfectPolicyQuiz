@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace PerfectPolicyQuiz.Controllers
 {
     [Route("api/[controller]")]
@@ -30,7 +28,6 @@ namespace PerfectPolicyQuiz.Controllers
             List<Question> Questions = _context.Questions.ToList();
             return Questions;
         }
-
 
         // GET api/<QuestionController>/5
         [HttpGet("{id}")]
@@ -63,7 +60,6 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Questions.Add(createdQuestion);
             _context.SaveChanges();
             return CreatedAtAction("Post", createdQuestion);
-
         }
 
         // PUT api/<QuestionController>/5
@@ -79,20 +75,6 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Questions.Update(question);
             _context.SaveChanges();
             return Ok(question);
-
-
-            /*_context.Entry(question).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            return NoContent();
-            */
         }
 
         // DELETE api/<QuestionController>/5

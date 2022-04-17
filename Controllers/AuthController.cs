@@ -41,7 +41,6 @@ namespace PerfectPolicyQuiz.Controllers
             return null;
         }
 
-
         [HttpPost]
         [Route("GenerateToken")]
         public IActionResult GenerateToken(UserInfo _userData)
@@ -67,7 +66,6 @@ namespace PerfectPolicyQuiz.Controllers
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
                     // use the generated key to generate new Signing Credentials
                     var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
                     // Generate a new token based on all of the details generated so far
                     var token = new JwtSecurityToken(
                         _config["Jwt:Issuer"],
@@ -85,40 +83,10 @@ namespace PerfectPolicyQuiz.Controllers
                     return BadRequest("Invalid credentials");
                 }
             }
-
             else
             {
                 return BadRequest();
             }
-
         }
-        /*
-        
-          [HttpPost]
-
-          public IActionResult SetColour(IFormCollection collection)
-          {
-              //Retrieve the backcolour from the collection
-              var backColour = collection["colourPicker"].ToString();
-
-              // Retrieve the headercolour from the collection
-              var headerColour = collection["headerColourPicker"].ToString();
-                  []
-              // Retrieve the appname from the collection
-
-              var appName = collection["titlePicker"].ToString();
-
-              // Save the retrieved values in the session
-              HttpContext.Session.SetString("backColor", backColour);
-              HttpContext.Session.SetString("headerColor", headerColour);
-              HttpContext.Session.SetString("@appName", appName);
-
-              // Refresh the page
-             }
-              */
-
-
-
-
     }
 }
