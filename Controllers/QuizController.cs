@@ -40,6 +40,27 @@ namespace PerfectPolicyQuiz.Controllers
             return quiz;
         }
 
+        // Post:api/Quiz
+        [HttpPost]
+        public ActionResult<Quiz> PostQuiz(Quiz quiz)
+        {
+            if (quiz == null)
+            {
+                return BadRequest();
+            }
+
+            Quiz newQuiz = new Quiz()
+            {
+                QuizTitle = quiz.QuizTitle,
+                QuizDate = quiz.QuizDate,
+                QuizPersonName = quiz.QuizPersonName,
+                QuizPassNumber = quiz.QuizPassNumber
+            };
+            _context.Quizs.Add(newQuiz);
+            _context.SaveChanges();
+            return CreatedAtAction("PostQuiz", newQuiz);
+        }
+
         // Put:api/Quiz/5
         [Authorize]
         [HttpPut("{id}")]
@@ -53,16 +74,6 @@ namespace PerfectPolicyQuiz.Controllers
             _context.Quizs.Update(quiz);
             _context.SaveChanges();
             return Ok();
-        }
-
-        // Post:api/Quiz
-        [HttpPost]
-        public ActionResult<Quiz> PostQuiz(Quiz quiz)
-        {
-            _context.Quizs.Add(quiz);
-            _context.SaveChanges();
-
-            return NoContent();
         }
 
         // Delete Get:api/Quiz/5

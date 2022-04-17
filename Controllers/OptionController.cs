@@ -42,9 +42,34 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpPost]
         public ActionResult<Option> PostOption(Option option)
         {
-            _context.Options.Add(option);
+            if (option == null)
+            {
+                return BadRequest();
+            }
+            /*if (option.Question.Options != null)
+            {
+                foreach (Option newOption in option.Question.Options)
+                {
+                    Option op = new Option()
+                    {
+                        OptionText = newOption.OptionText,
+                        OptionNumber = newOption.OptionNumber,
+                        QuestionId = newOption.QuestionId
+                    };
+                    _context.Options.Add(op);
+                }
+            }*/
+
+            Option createdOption = new Option()
+            {
+                OptionText = option.OptionText,
+                OptionNumber = option.OptionNumber,
+                QuestionId = option.QuestionId
+            };
+
+            _context.Options.Add(createdOption);
             _context.SaveChanges();
-            return NoContent();
+            return CreatedAtAction("PostOption", createdOption);
         }
 
         // PUT api/<OptionController>/5

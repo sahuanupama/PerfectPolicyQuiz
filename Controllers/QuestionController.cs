@@ -50,14 +50,36 @@ namespace PerfectPolicyQuiz.Controllers
                 return BadRequest();
             }
 
+            /* Quiz newQuiz = new Quiz()
+             {
+                 QuizTitle = question.Quiz.QuizTitle,
+                 QuizDate = question.Quiz.QuizDate,
+                 QuizPersonName = question.Quiz.QuizPersonName,
+                 QuizPassNumber = question.Quiz.QuizPassNumber
+             };
+             _context.Quizs.Add(newQuiz);*/
+
             Question createdQuestion = new Question()
             {
-                QuestionId = question.QuestionId,
+                // QuestionId = question.QuestionId,
                 QuestionTopic = question.QuestionTopic,
-                QuestionText = question.QuestionText
-
+                QuestionText = question.QuestionText,
+                QuestionImage = question.QuestionImage,
+                QuizId = question.QuizId
             };
             _context.Questions.Add(createdQuestion);
+
+            /* foreach (Option newOption in question.Options)
+             {
+                 Option option = new Option()
+                 {
+                     // OptionId = newOption.OptionId,
+                     OptionText = newOption.OptionText,
+                     OptionNumber = newOption.OptionNumber,
+                     QuestionId = newOption.QuestionId
+                 };
+                 _context.Options.Add(option);
+             }*/
             _context.SaveChanges();
             return CreatedAtAction("Post", createdQuestion);
         }
