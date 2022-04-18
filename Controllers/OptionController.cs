@@ -20,9 +20,18 @@ namespace PerfectPolicyQuiz.Controllers
 
         // GET: api/<OptionController>
         [HttpGet]
-        public ActionResult<IEnumerable<Option>> GetOptions()
+        public ActionResult<IEnumerable<Option>> GetOptions(int questionId)
         {
-            List<Option> Options = _context.Options.ToList();
+            List<Option> Options = new List<Option>();
+
+            if (questionId > 0)
+            {
+                Options = _context.Options.Where(o => o.QuestionId == questionId).ToList();
+            }
+            else
+            {
+                Options = _context.Options.ToList();
+            }
             return Options;
         }
 
@@ -47,7 +56,8 @@ namespace PerfectPolicyQuiz.Controllers
             {
                 return BadRequest();
             }
-            /*if (option.Question.Options != null)
+
+            if (option.Question.Options != null)
             {
                 foreach (Option newOption in option.Question.Options)
                 {
@@ -55,26 +65,28 @@ namespace PerfectPolicyQuiz.Controllers
                     {
                         OptionText = newOption.OptionText,
                         OptionNumber = newOption.OptionNumber,
-                        QuestionId = newOption.QuestionId
+                        QuestionId = option.Question.QuestionId
                     };
                     _context.Options.Add(op);
                 }
-            }*/
-
-            Option createdOption = new Option()
+            }
+            else
             {
-                OptionText = option.OptionText,
-                OptionNumber = option.OptionNumber,
-                QuestionId = option.QuestionId
-            };
-
-            _context.Options.Add(createdOption);
+                Option createdOption = new Option()
+                {
+                    OptionText = option.OptionText,
+                    OptionNumber = option.OptionNumber,
+                    QuestionId = option.QuestionId
+                };
+                _context.Options.Add(createdOption);
+            }
             _context.SaveChanges();
-            return CreatedAtAction("PostOption", createdOption);
+            // return CreatedAtAction("PostOption", createdOption);
+            return Ok();
         }
 
         // PUT api/<OptionController>/5
-        [Authorize]
+        // [Authorize]
         [HttpPut("{id}")]
         public ActionResult<Option> PutOption(int id, Option option)
         {
@@ -92,7 +104,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // DELETE api/<OptionController>/5
-        [Authorize]
+        // [Authorize]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

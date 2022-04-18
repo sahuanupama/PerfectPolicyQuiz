@@ -21,10 +21,33 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // Get:api/Quiz
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult<IEnumerable<Quiz>> GetQuizs()
         {
             List<Quiz> Quizs = _context.Quizs.ToList();
+            return Quizs;
+        }*/
+
+        // Get:api/Quiz
+        [HttpGet]
+        public ActionResult<IEnumerable<Quiz>> GetQuizsForTopic(String topic)
+        {
+            List<Quiz> Quizs = new List<Quiz>();
+            if (topic != null)
+            {
+                List<int> quizIds = _context.Questions.Where(q => q.QuestionTopic == topic).Select(q => q.QuizId).Distinct().ToList();
+
+                foreach (int qId in quizIds)
+                {
+                    Quiz quiz = _context.Quizs.Find(qId);
+                    Quizs.Add(quiz);
+                }
+            }
+            else
+            {
+                Quizs = _context.Quizs.ToList();
+            }
+
             return Quizs;
         }
 

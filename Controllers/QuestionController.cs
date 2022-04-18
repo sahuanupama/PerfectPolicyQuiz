@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using PerfectPolicyQuiz.Models;
 using PerfectPolicyQuiz.Models.Data;
 using System;
@@ -23,9 +24,18 @@ namespace PerfectPolicyQuiz.Controllers
         // GET: api/<QuestionController>
         // Get all Questions
         [HttpGet]
-        public ActionResult<IEnumerable<Question>> GetQuestions()
+        public ActionResult<IEnumerable<Question>> GetQuestions(int quizid)
         {
-            List<Question> Questions = _context.Questions.ToList();
+            List<Question> Questions = new List<Question>();
+            if (quizid > 0)
+            {
+                Questions = _context.Questions.Where(q => q.QuizId == quizid).ToList();
+            }
+            else
+            {
+                Questions = _context.Questions.ToList();
+            }
+
             return Questions;
         }
 
@@ -59,16 +69,33 @@ namespace PerfectPolicyQuiz.Controllers
              };
              _context.Quizs.Add(newQuiz);*/
 
-            Question createdQuestion = new Question()
+            if (question.Quiz != null)
             {
-                // QuestionId = question.QuestionId,
-                QuestionTopic = question.QuestionTopic,
-                QuestionText = question.QuestionText,
-                QuestionImage = question.QuestionImage,
-                QuizId = question.QuizId
-            };
-            _context.Questions.Add(createdQuestion);
+                foreach (Question newQuestion in question.Quiz.Questions)
+                {
+                    Question multiquestions = new Question()
+                    {
+                        QuestionTopic = newQuestion.QuestionTopic,
+                        QuestionText = newQuestion.QuestionText,
+                        QuestionImage = newQuestion.QuestionImage,
+                        QuizId = question.Quiz.QuizId
+                    };
+                    _context.Questions.Add(multiquestions);
+                }
+            }
+            else
+            {
 
+                Question createdQuestion = new Question()
+                {
+                    // QuestionId = question.QuestionId,
+                    QuestionTopic = question.QuestionTopic,
+                    QuestionText = question.QuestionText,
+                    QuestionImage = question.QuestionImage,
+                    QuizId = question.QuizId
+                };
+                _context.Questions.Add(createdQuestion);
+            }
             /* foreach (Option newOption in question.Options)
              {
                  Option option = new Option()
@@ -81,7 +108,8 @@ namespace PerfectPolicyQuiz.Controllers
                  _context.Options.Add(option);
              }*/
             _context.SaveChanges();
-            return CreatedAtAction("Post", createdQuestion);
+            // return CreatedAtAction("Post", createdQuestion);
+            return Ok();
         }
 
         // PUT api/<QuestionController>/5
