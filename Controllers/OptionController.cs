@@ -13,6 +13,8 @@ namespace PerfectPolicyQuiz.Controllers
     public class OptionController : ControllerBase
     {
         private readonly PerfectPolicyQuizContext _context;
+
+
         public OptionController(PerfectPolicyQuizContext context)
         {
             _context = context;
@@ -57,7 +59,7 @@ namespace PerfectPolicyQuiz.Controllers
                 return BadRequest();
             }
 
-            if (option.Question.Options != null)
+            if (option.Question != null && option.Question.Options != null)
             {
                 foreach (Option newOption in option.Question.Options)
                 {
@@ -80,8 +82,8 @@ namespace PerfectPolicyQuiz.Controllers
                 };
                 _context.Options.Add(createdOption);
             }
+
             _context.SaveChanges();
-            // return CreatedAtAction("PostOption", createdOption);
             return Ok();
         }
 

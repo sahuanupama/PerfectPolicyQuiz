@@ -113,7 +113,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // PUT api/<QuestionController>/5
-        [Authorize]
+        //  [Authorize]
         [HttpPut("{id}")]
         public ActionResult<Question> Put(int id, [FromBody] Question question)
         {
@@ -128,7 +128,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // DELETE api/<QuestionController>/5
-        [Authorize]
+        // [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteQuestion(int id)
         {
@@ -143,5 +143,12 @@ namespace PerfectPolicyQuiz.Controllers
 
             return Ok();
         }
+
+        [HttpGet("QuestionsForQuizId/{id}")]
+        public ActionResult QuestionsForQuizId(int id)
+        {
+            return Ok(_context.Questions.Where(c => c.QuizId == id));
+        }
+
     }
 }

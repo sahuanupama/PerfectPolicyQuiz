@@ -85,7 +85,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // Put:api/Quiz/5
-        [Authorize]
+        //  [Authorize]
         [HttpPut("{id}")]
         public ActionResult<Quiz> PutQuiz(int id, [FromBody] Quiz quiz)
         {
@@ -100,7 +100,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // Delete Get:api/Quiz/5
-        [Authorize]
+        //  [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteQuiz(int id)
         {
