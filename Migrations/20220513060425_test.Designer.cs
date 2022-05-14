@@ -10,8 +10,8 @@ using PerfectPolicyQuiz.Models.Data;
 namespace PerfectPolicyQuiz.Migrations
 {
     [DbContext(typeof(PerfectPolicyQuizContext))]
-    [Migration("20220304060613_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20220513060425_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,9 +29,11 @@ namespace PerfectPolicyQuiz.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("OptionNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OptionText")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuestionId")
@@ -58,14 +60,54 @@ namespace PerfectPolicyQuiz.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("QuizPersonName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuizTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuizId");
 
                     b.ToTable("Quizs");
+
+                    b.HasData(
+                        new
+                        {
+                            QuizId = 1,
+                            QuizDate = new DateTime(2020, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            QuizPassNumber = 0,
+                            QuizPersonName = "Anu",
+                            QuizTitle = "Copyright"
+                        });
+                });
+
+            modelBuilder.Entity("PerfectPolicyQuiz.Models.Data.UserInfo", b =>
+                {
+                    b.Property<int>("UserInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserInfoId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserInfoId = 1,
+                            Password = "1234_abc",
+                            Username = "Anupama"
+                        });
                 });
 
             modelBuilder.Entity("PerfectPolicyQuiz.Models.Question", b =>
@@ -76,12 +118,15 @@ namespace PerfectPolicyQuiz.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("QuestionImage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionText")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("QuestionTopic")
+                    b.Property<string>("QuestionToipc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuizId")

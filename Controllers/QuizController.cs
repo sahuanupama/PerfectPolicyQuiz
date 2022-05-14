@@ -21,21 +21,21 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         // Get:api/Quiz
-        /*[HttpGet]
+        [HttpGet]
         public ActionResult<IEnumerable<Quiz>> GetQuizs()
         {
             List<Quiz> Quizs = _context.Quizs.ToList();
             return Quizs;
-        }*/
+        }
 
         // Get:api/Quiz
-        [HttpGet]
-        public ActionResult<IEnumerable<Quiz>> GetQuizsForTopic(String topic)
+        /*[HttpGet]
+        public ActionResult<IEnumerable<Quiz>> GetQuizsForTopic(string topic = "")
         {
             List<Quiz> Quizs = new List<Quiz>();
             if (topic != null)
             {
-                List<int> quizIds = _context.Questions.Where(q => q.QuestionTopic == topic).Select(q => q.QuizId).Distinct().ToList();
+                List<int> quizIds = _context.Questions.Where(q => q.QuestionToipc == topic).Select(q => q.QuizId).Distinct().ToList();
 
                 foreach (int qId in quizIds)
                 {
@@ -49,7 +49,7 @@ namespace PerfectPolicyQuiz.Controllers
             }
 
             return Quizs;
-        }
+        }*/
 
         // Get:api/<QuizController>/5
         [HttpGet("{id}")]

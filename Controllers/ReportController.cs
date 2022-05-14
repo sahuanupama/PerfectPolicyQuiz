@@ -22,7 +22,7 @@ namespace PerfectPolicyQuiz.Controllers
         }
 
         [HttpGet("QuizCountReport")]
-        public IActionResult QuizCountReport(DateTime? from, DateTime? to, string name = "")
+        public IActionResult QuizCountReport(DateTime? from, DateTime? to, string? name)
         {
             var quiz = _context.Quizs.Include(c => c.Questions);
             if (from != null)
@@ -42,8 +42,6 @@ namespace PerfectPolicyQuiz.Controllers
             }).ToList();
 
             return Ok(QuizCountlist);
-
-            // return Ok();
         }
     }
 }

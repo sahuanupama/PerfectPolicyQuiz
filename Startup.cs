@@ -46,6 +46,11 @@ namespace PerfectPolicyQuiz
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PerfectPolicyQuiz", Version = "v1" });
+                // var WorkingDirectory = AppContext.BaseDirectory;
+                // var XmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
+                // c.IncludeXmlComments(Path.Combine(WorkingDirectory.xmlFile))
+
             });
         }
 
@@ -53,10 +58,11 @@ namespace PerfectPolicyQuiz
         {
             if (env.IsDevelopment())
             {
-                if (!context.Database.GetService<IRelationalDatabaseCreator>().HasTables())
+                /*if (!context.Database.GetService<IRelationalDatabaseCreator>().HasTables())
                 {
                     context.Database.Migrate();
-                }
+                }*/
+
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PerfectPolicyQuiz v1"));

@@ -21,7 +21,7 @@ namespace PerfectPolicyQuiz.Models.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Quiz>().HasData(
-                new Quiz { QuizId = 1, QuizTitle = "Copyright", QuizDate = new DateTime(2020, 10, 15) }
+                new Quiz { QuizId = 1, QuizTitle = "Copyright", QuizDate = new DateTime(2020, 10, 15), QuizPersonName = "Anu" }
                 );
             builder.Entity<UserInfo>().HasData(
                 new UserInfo { UserInfoId = 1, Username = "Anupama", Password = "1234_abc" });

@@ -75,7 +75,7 @@ namespace PerfectPolicyQuiz.Controllers
                 {
                     Question multiquestions = new Question()
                     {
-                        QuestionTopic = newQuestion.QuestionTopic,
+                        QuestionToipc = newQuestion.QuestionToipc,
                         QuestionText = newQuestion.QuestionText,
                         QuestionImage = newQuestion.QuestionImage,
                         QuizId = question.Quiz.QuizId
@@ -89,7 +89,7 @@ namespace PerfectPolicyQuiz.Controllers
                 Question createdQuestion = new Question()
                 {
                     // QuestionId = question.QuestionId,
-                    QuestionTopic = question.QuestionTopic,
+                    QuestionToipc = question.QuestionToipc,
                     QuestionText = question.QuestionText,
                     QuestionImage = question.QuestionImage,
                     QuizId = question.QuizId
