@@ -12,8 +12,6 @@ namespace PerfectPolicyQuiz.Models.Data
         public DateTime QuizDate { get; set; }
         public string QuizPersonName { get; set; }
         public int QuizPassNumber { get; set; }
-        //public string QuestionNumber { get; set; }
-
         public ICollection<Question> Questions { get; set; }
     }
 }

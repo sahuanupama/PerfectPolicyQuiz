@@ -3,12 +3,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PerfectPolicyQuiz.Migrations
 {
-    public partial class test : Migration
+    public partial class PerfectPolicyQuiz : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Quizs",
+                name: "Options",
+                columns: table => new
+                {
+                    OptionId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OptionText = table.Column<string>(nullable: false),
+                    OptionNumber = table.Column<string>(nullable: false),
+                    QuestionId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Options", x => x.OptionId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Quizzes",
                 columns: table => new
                 {
                     QuizId = table.Column<int>(nullable: false)
@@ -20,7 +35,7 @@ namespace PerfectPolicyQuiz.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quizs", x => x.QuizId);
+                    table.PrimaryKey("PK_Quizzes", x => x.QuizId);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +58,7 @@ namespace PerfectPolicyQuiz.Migrations
                 {
                     QuestionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestionToipc = table.Column<string>(nullable: false),
+                    QuestionTopic = table.Column<string>(nullable: false),
                     QuestionText = table.Column<string>(nullable: false),
                     QuestionImage = table.Column<string>(nullable: false),
                     QuizId = table.Column<int>(nullable: false)
@@ -52,36 +67,15 @@ namespace PerfectPolicyQuiz.Migrations
                 {
                     table.PrimaryKey("PK_Questions", x => x.QuestionId);
                     table.ForeignKey(
-                        name: "FK_Questions_Quizs_QuizId",
+                        name: "FK_Questions_Quizzes_QuizId",
                         column: x => x.QuizId,
-                        principalTable: "Quizs",
+                        principalTable: "Quizzes",
                         principalColumn: "QuizId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Options",
-                columns: table => new
-                {
-                    OptionId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OptionText = table.Column<string>(nullable: false),
-                    OptionNumber = table.Column<string>(nullable: false),
-                    QuestionId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Options", x => x.OptionId);
-                    table.ForeignKey(
-                        name: "FK_Options_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
-                        principalColumn: "QuestionId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
-                table: "Quizs",
+                table: "Quizzes",
                 columns: new[] { "QuizId", "QuizDate", "QuizPassNumber", "QuizPersonName", "QuizTitle" },
                 values: new object[] { 1, new DateTime(2020, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "Anu", "Copyright" });
 
@@ -89,11 +83,6 @@ namespace PerfectPolicyQuiz.Migrations
                 table: "Users",
                 columns: new[] { "UserInfoId", "Password", "Username" },
                 values: new object[] { 1, "1234_abc", "Anupama" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Options_QuestionId",
-                table: "Options",
-                column: "QuestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_QuizId",
@@ -107,13 +96,13 @@ namespace PerfectPolicyQuiz.Migrations
                 name: "Options");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "Quizs");
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Quizzes");
         }
     }
 }

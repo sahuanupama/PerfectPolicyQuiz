@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PerfectPolicyQuiz.Models.Data
 {
     public class PerfectPolicyQuizContext : DbContext
-    {
+    { 
         public PerfectPolicyQuizContext(DbContextOptions options) : base(options)
         {
 
@@ -15,7 +15,7 @@ namespace PerfectPolicyQuiz.Models.Data
 
         public DbSet<Option> Options { get; set; }
         public DbSet<Question> Questions { get; set; }
-        public DbSet<Quiz> Quizs { get; set; }
+        public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<UserInfo> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

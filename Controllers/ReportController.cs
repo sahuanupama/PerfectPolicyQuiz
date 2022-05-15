@@ -24,7 +24,7 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpGet("QuizCountReport")]
         public IActionResult QuizCountReport(DateTime? from, DateTime? to, string? name)
         {
-            var quiz = _context.Quizs.Include(c => c.Questions);
+            var quiz = _context.Quizzes.Include(c => c.Questions);
             if (from != null)
             {
                 quiz.Where(c => c.QuizDate > from);
@@ -37,7 +37,7 @@ namespace PerfectPolicyQuiz.Controllers
 
             var QuizCountlist = quiz.Select(c => new QuizCount
             {
-                QuizName = c.QuizPersonName,
+                QuizPersonName = c.QuizPersonName,
                 QuestionCount = c.Questions.Count
             }).ToList();
 

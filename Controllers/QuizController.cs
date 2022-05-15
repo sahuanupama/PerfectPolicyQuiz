@@ -22,40 +22,17 @@ namespace PerfectPolicyQuiz.Controllers
 
         // Get:api/Quiz
         [HttpGet]
-        public ActionResult<IEnumerable<Quiz>> GetQuizs()
+        public ActionResult<IEnumerable<Quiz>> GetQuizzes()
         {
-            List<Quiz> Quizs = _context.Quizs.ToList();
-            return Quizs;
+            List<Quiz> Quizzes = _context.Quizzes.ToList();
+            return Quizzes;
         }
-
-        // Get:api/Quiz
-        /*[HttpGet]
-        public ActionResult<IEnumerable<Quiz>> GetQuizsForTopic(string topic = "")
-        {
-            List<Quiz> Quizs = new List<Quiz>();
-            if (topic != null)
-            {
-                List<int> quizIds = _context.Questions.Where(q => q.QuestionToipc == topic).Select(q => q.QuizId).Distinct().ToList();
-
-                foreach (int qId in quizIds)
-                {
-                    Quiz quiz = _context.Quizs.Find(qId);
-                    Quizs.Add(quiz);
-                }
-            }
-            else
-            {
-                Quizs = _context.Quizs.ToList();
-            }
-
-            return Quizs;
-        }*/
 
         // Get:api/<QuizController>/5
         [HttpGet("{id}")]
         public ActionResult<Quiz> GetQuiz(int id)
         {
-            Quiz quiz = _context.Quizs.Find(id);
+            Quiz quiz = _context.Quizzes.Find(id);
             if (quiz == null)
             {
                 return NotFound();
@@ -79,7 +56,7 @@ namespace PerfectPolicyQuiz.Controllers
                 QuizPersonName = quiz.QuizPersonName,
                 QuizPassNumber = quiz.QuizPassNumber
             };
-            _context.Quizs.Add(newQuiz);
+            _context.Quizzes.Add(newQuiz);
             _context.SaveChanges();
             return CreatedAtAction("PostQuiz", newQuiz);
         }
@@ -94,7 +71,7 @@ namespace PerfectPolicyQuiz.Controllers
                 return BadRequest();
             }
 
-            _context.Quizs.Update(quiz);
+            _context.Quizzes.Update(quiz);
             _context.SaveChanges();
             return Ok(quiz);
         }
@@ -104,13 +81,13 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteQuiz(int id)
         {
-            Quiz quiz = _context.Quizs.Find(id);
+            Quiz quiz = _context.Quizzes.Find(id);
             if (quiz == null)
             {
                 return NotFound();
             }
 
-            _context.Quizs.Remove(quiz);
+            _context.Quizzes.Remove(quiz);
             _context.SaveChanges();
 
             return Ok();

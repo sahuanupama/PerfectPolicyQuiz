@@ -59,30 +59,13 @@ namespace PerfectPolicyQuiz.Controllers
                 return BadRequest();
             }
 
-            if (option.Question != null && option.Question.Options != null)
+            Option createdOption = new Option()
             {
-                foreach (Option newOption in option.Question.Options)
-                {
-                    Option op = new Option()
-                    {
-                        OptionText = newOption.OptionText,
-                        OptionNumber = newOption.OptionNumber,
-                        QuestionId = option.Question.QuestionId
-                    };
-                    _context.Options.Add(op);
-                }
-            }
-            else
-            {
-                Option createdOption = new Option()
-                {
-                    OptionText = option.OptionText,
-                    OptionNumber = option.OptionNumber,
-                    QuestionId = option.QuestionId
-                };
-                _context.Options.Add(createdOption);
-            }
-
+                OptionText = option.OptionText,
+                OptionNumber = option.OptionNumber,
+                QuestionId = option.QuestionId
+            };
+            _context.Options.Add(createdOption);
             _context.SaveChanges();
             return Ok();
         }

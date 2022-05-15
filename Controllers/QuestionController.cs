@@ -60,53 +60,15 @@ namespace PerfectPolicyQuiz.Controllers
                 return BadRequest();
             }
 
-            /* Quiz newQuiz = new Quiz()
-             {
-                 QuizTitle = question.Quiz.QuizTitle,
-                 QuizDate = question.Quiz.QuizDate,
-                 QuizPersonName = question.Quiz.QuizPersonName,
-                 QuizPassNumber = question.Quiz.QuizPassNumber
-             };
-             _context.Quizs.Add(newQuiz);*/
-
-            if (question.Quiz != null)
+            Question createdQuestion = new Question()
             {
-                foreach (Question newQuestion in question.Quiz.Questions)
-                {
-                    Question multiquestions = new Question()
-                    {
-                        QuestionToipc = newQuestion.QuestionToipc,
-                        QuestionText = newQuestion.QuestionText,
-                        QuestionImage = newQuestion.QuestionImage,
-                        QuizId = question.Quiz.QuizId
-                    };
-                    _context.Questions.Add(multiquestions);
-                }
-            }
-            else
-            {
+                QuestionTopic = question.QuestionTopic,
+                QuestionText = question.QuestionText,
+                QuestionImage = question.QuestionImage,
+                QuizId = question.QuizId
+            };
+            _context.Questions.Add(createdQuestion);
 
-                Question createdQuestion = new Question()
-                {
-                    // QuestionId = question.QuestionId,
-                    QuestionToipc = question.QuestionToipc,
-                    QuestionText = question.QuestionText,
-                    QuestionImage = question.QuestionImage,
-                    QuizId = question.QuizId
-                };
-                _context.Questions.Add(createdQuestion);
-            }
-            /* foreach (Option newOption in question.Options)
-             {
-                 Option option = new Option()
-                 {
-                     // OptionId = newOption.OptionId,
-                     OptionText = newOption.OptionText,
-                     OptionNumber = newOption.OptionNumber,
-                     QuestionId = newOption.QuestionId
-                 };
-                 _context.Options.Add(option);
-             }*/
             _context.SaveChanges();
             // return CreatedAtAction("Post", createdQuestion);
             return Ok();

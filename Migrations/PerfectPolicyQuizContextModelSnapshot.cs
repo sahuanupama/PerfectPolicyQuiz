@@ -39,8 +39,6 @@ namespace PerfectPolicyQuiz.Migrations
 
                     b.HasKey("OptionId");
 
-                    b.HasIndex("QuestionId");
-
                     b.ToTable("Options");
                 });
 
@@ -67,7 +65,7 @@ namespace PerfectPolicyQuiz.Migrations
 
                     b.HasKey("QuizId");
 
-                    b.ToTable("Quizs");
+                    b.ToTable("Quizzes");
 
                     b.HasData(
                         new
@@ -123,7 +121,7 @@ namespace PerfectPolicyQuiz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("QuestionToipc")
+                    b.Property<string>("QuestionTopic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -137,18 +135,9 @@ namespace PerfectPolicyQuiz.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("PerfectPolicyQuiz.Models.Data.Option", b =>
-                {
-                    b.HasOne("PerfectPolicyQuiz.Models.Question", "Question")
-                        .WithMany("Options")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PerfectPolicyQuiz.Models.Question", b =>
                 {
-                    b.HasOne("PerfectPolicyQuiz.Models.Data.Quiz", "Quiz")
+                    b.HasOne("PerfectPolicyQuiz.Models.Data.Quiz", null)
                         .WithMany("Questions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)

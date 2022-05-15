@@ -10,8 +10,8 @@ using PerfectPolicyQuiz.Models.Data;
 namespace PerfectPolicyQuiz.Migrations
 {
     [DbContext(typeof(PerfectPolicyQuizContext))]
-    [Migration("20220513060425_test")]
-    partial class test
+    [Migration("20220515083456_PerfectPolicyQuiz")]
+    partial class PerfectPolicyQuiz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,8 +41,6 @@ namespace PerfectPolicyQuiz.Migrations
 
                     b.HasKey("OptionId");
 
-                    b.HasIndex("QuestionId");
-
                     b.ToTable("Options");
                 });
 
@@ -69,7 +67,7 @@ namespace PerfectPolicyQuiz.Migrations
 
                     b.HasKey("QuizId");
 
-                    b.ToTable("Quizs");
+                    b.ToTable("Quizzes");
 
                     b.HasData(
                         new
@@ -125,7 +123,7 @@ namespace PerfectPolicyQuiz.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("QuestionToipc")
+                    b.Property<string>("QuestionTopic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -139,18 +137,9 @@ namespace PerfectPolicyQuiz.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("PerfectPolicyQuiz.Models.Data.Option", b =>
-                {
-                    b.HasOne("PerfectPolicyQuiz.Models.Question", "Question")
-                        .WithMany("Options")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("PerfectPolicyQuiz.Models.Question", b =>
                 {
-                    b.HasOne("PerfectPolicyQuiz.Models.Data.Quiz", "Quiz")
+                    b.HasOne("PerfectPolicyQuiz.Models.Data.Quiz", null)
                         .WithMany("Questions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
