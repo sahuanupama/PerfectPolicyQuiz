@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PerfectPolicyQuiz.Models
+namespace PerfectPolicyQuiz.Models.Data
 {
     public class Question
     {
