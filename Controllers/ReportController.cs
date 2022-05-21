@@ -35,13 +35,13 @@ namespace PerfectPolicyQuiz.Controllers
             };
 
 
-            var QuizCountlist = quiz.Select(c => new QuizCount
+            var QuizCountList = quiz.Select(c => new QuizCount
             {
                 QuizPersonName = c.QuizPersonName,
                 QuestionCount = c.Questions.Count
             }).ToList();
 
-            return Ok(QuizCountlist);
+            return Ok(QuizCountList);
         }
     }
 }

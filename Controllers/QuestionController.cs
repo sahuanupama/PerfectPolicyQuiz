@@ -55,7 +55,7 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpPost]
         public ActionResult<Question> Post(Question question)
         {
-            if (question == null)
+            if (question.QuizId < 1)
             {
                 return BadRequest();
             }

@@ -54,7 +54,7 @@ namespace PerfectPolicyQuiz.Controllers
         [HttpPost]
         public ActionResult<Option> PostOption(Option option)
         {
-            if (option == null)
+            if (option.QuestionId < 1)
             {
                 return BadRequest();
             }
