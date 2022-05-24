@@ -60,7 +60,7 @@ namespace PerfectPolicyQuiz.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionTopic = table.Column<string>(nullable: false),
                     QuestionText = table.Column<string>(nullable: false),
-                    QuestionImage = table.Column<string>(nullable: false),
+                    QuestionImage = table.Column<string>(nullable: true),
                     QuizId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

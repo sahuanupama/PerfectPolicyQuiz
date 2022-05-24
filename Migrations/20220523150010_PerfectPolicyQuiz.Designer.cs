@@ -10,7 +10,7 @@ using PerfectPolicyQuiz.Models.Data;
 namespace PerfectPolicyQuiz.Migrations
 {
     [DbContext(typeof(PerfectPolicyQuizContext))]
-    [Migration("20220515083456_PerfectPolicyQuiz")]
+    [Migration("20220523150010_PerfectPolicyQuiz")]
     partial class PerfectPolicyQuiz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,34 @@ namespace PerfectPolicyQuiz.Migrations
                     b.HasKey("OptionId");
 
                     b.ToTable("Options");
+                });
+
+            modelBuilder.Entity("PerfectPolicyQuiz.Models.Data.Question", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("QuestionImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuestionText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuestionTopic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuestionId");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("PerfectPolicyQuiz.Models.Data.Quiz", b =>
@@ -108,36 +136,7 @@ namespace PerfectPolicyQuiz.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PerfectPolicyQuiz.Models.Question", b =>
-                {
-                    b.Property<int>("QuestionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("QuestionImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QuestionTopic")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionId");
-
-                    b.HasIndex("QuizId");
-
-                    b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("PerfectPolicyQuiz.Models.Question", b =>
+            modelBuilder.Entity("PerfectPolicyQuiz.Models.Data.Question", b =>
                 {
                     b.HasOne("PerfectPolicyQuiz.Models.Data.Quiz", null)
                         .WithMany("Questions")
