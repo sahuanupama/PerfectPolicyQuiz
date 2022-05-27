@@ -4,5 +4,30 @@
         <name>PerfectPolicyQuiz</name>
     </assembly>
     <members>
+        <member name="M:PerfectPolicyQuiz.Controllers.QuizController.GetQuiz(System.Int32)">
+            <summary>
+            Retrive Quiz
+            </summary>
+            <param name="id">Quiz ID</param>
+            <returns>List of Quiz </returns>
+        </member>
+        <member name="M:PerfectPolicyQuiz.Controllers.QuizController.PostQuiz(PerfectPolicyQuiz.Models.Data.Quiz)">
+            <summary>
+            Create New Quiz
+            </summary>
+            <param name="quiz"> Quiz</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:PerfectPolicyQuiz.Controllers.QuizController.PutQuiz(System.Int32,PerfectPolicyQuiz.Models.Data.Quiz)" -->
+        <member name="M:PerfectPolicyQuiz.Controllers.QuizController.DeleteQuiz(System.Int32)">
+            <summary>
+            Delete Quiz
+            </summary>
+            <remarks>
+            Before deleting make sure all questions and options are alredy deleted.
+            </remarks>
+            <param name="id">Quiz ID</param>
+            <returns> Quiz View </returns>
+        </member>
     </members>
 </doc>

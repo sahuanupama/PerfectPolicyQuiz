@@ -39,7 +39,7 @@ namespace PerfectPolicyQuiz.Controllers
             return Questions;
         }
 
-        // GET api/<QuestionController>/5
+        // GET api/<QuestionController>/5 
         [HttpGet("{id}")]
         public ActionResult<Question> Get(int id)
         {
@@ -111,6 +111,5 @@ namespace PerfectPolicyQuiz.Controllers
         {
             return Ok(_context.Questions.Where(c => c.QuizId == id));
         }
-
     }
 }

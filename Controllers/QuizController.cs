@@ -28,6 +28,11 @@ namespace PerfectPolicyQuiz.Controllers
             return Quizzes;
         }
 
+        /// <summary>
+        /// Retrive Quiz
+        /// </summary>
+        /// <param name="id">Quiz ID</param>
+        /// <returns>List of Quiz </returns>
         // Get:api/<QuizController>/5
         [HttpGet("{id}")]
         public ActionResult<Quiz> GetQuiz(int id)
@@ -39,7 +44,11 @@ namespace PerfectPolicyQuiz.Controllers
             }
             return quiz;
         }
-
+        /// <summary>
+        /// Create New Quiz
+        /// </summary>
+        /// <param name="quiz"> Quiz</param>
+        /// <returns></returns>
         // Post:api/Quiz
         [HttpPost]
         public ActionResult<Quiz> PostQuiz(Quiz quiz)
@@ -60,7 +69,15 @@ namespace PerfectPolicyQuiz.Controllers
             _context.SaveChanges();
             return CreatedAtAction("PostQuiz", newQuiz);
         }
-
+        /// <summary>
+        ///  Updates Quiz 
+        /// </summary>
+        /// <remarks>
+        /// We can update existing Quiz
+        /// <remarks>
+        /// <param name="id">Quiz ID </param>
+        /// <param name="quiz">Quiz </param>
+        /// <returns></returns>
         // Put:api/Quiz/5
         //  [Authorize]
         [HttpPut("{id}")]
@@ -75,7 +92,14 @@ namespace PerfectPolicyQuiz.Controllers
             _context.SaveChanges();
             return Ok(quiz);
         }
-
+        /// <summary>
+        /// Delete Quiz
+        /// </summary>
+        /// <remarks>
+        /// Before deleting make sure all questions and options are alredy deleted.
+        /// </remarks>
+        /// <param name="id">Quiz ID</param>
+        /// <returns> Quiz View </returns>
         // Delete Get:api/Quiz/5
         //  [Authorize]
         [HttpDelete("{id}")]
