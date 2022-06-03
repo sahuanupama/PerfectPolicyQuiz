@@ -4,6 +4,21 @@
         <name>PerfectPolicyQuiz</name>
     </assembly>
     <members>
+        <member name="M:PerfectPolicyQuiz.Controllers.AuthController.GetUser(System.String,System.String)">
+            <summary>
+            Create identity
+            </summary>
+            <param name="userName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PerfectPolicyQuiz.Controllers.AuthController.GenerateToken(PerfectPolicyQuiz.Models.Data.UserInfo)">
+            <summary>
+            Generate a token for user
+            </summary>
+            <param name="_userData">User data to generate auth token</param>
+            <returns>Auth token for user</returns>
+        </member>
         <member name="M:PerfectPolicyQuiz.Controllers.QuizController.GetQuiz(System.Int32)">
             <summary>
             Retrive Quiz
@@ -28,6 +43,15 @@
             </remarks>
             <param name="id">Quiz ID</param>
             <returns> Quiz View </returns>
+        </member>
+        <member name="M:PerfectPolicyQuiz.Controllers.ReportController.QuizCountReport(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Create report
+            </summary>
+            <param name="from">Start date for the report</param>
+            <param name="to">End date for the report</param>
+            <param name="name"> name of the quiz to generate report</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

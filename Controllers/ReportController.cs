@@ -21,6 +21,13 @@ namespace PerfectPolicyQuiz.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Create report
+        /// </summary>
+        /// <param name="from">Start date for the report</param>
+        /// <param name="to">End date for the report</param>
+        /// <param name="name"> name of the quiz to generate report</param>
+        /// <returns></returns>
         [HttpGet("QuizCountReport")]
         public IActionResult QuizCountReport(DateTime? from, DateTime? to, string? name)
         {
@@ -34,10 +41,9 @@ namespace PerfectPolicyQuiz.Controllers
                 quiz.Where(c => c.QuizDate > to);
             };
 
-
             var QuizCountList = quiz.Select(c => new QuizCount
             {
-                QuizPersonName = c.QuizPersonName,
+                QuizPersonName = c.QuizTitle,
                 QuestionCount = c.Questions.Count
             }).ToList();
 

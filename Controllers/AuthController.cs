@@ -14,6 +14,7 @@ using System.Text;
 
 namespace PerfectPolicyQuiz.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : Controller
@@ -27,6 +28,12 @@ namespace PerfectPolicyQuiz.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Create identity
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private UserInfo GetUser(string userName, string password)
         {
             UserInfo user = _context.Users.FirstOrDefault(u => u.Username == userName);
@@ -41,6 +48,11 @@ namespace PerfectPolicyQuiz.Controllers
             return null;
         }
 
+        /// <summary>
+        /// Generate a token for user
+        /// </summary>
+        /// <param name="_userData">User data to generate auth token</param>
+        /// <returns>Auth token for user</returns>
         [HttpPost]
         [Route("GenerateToken")]
         public IActionResult GenerateToken(UserInfo _userData)
